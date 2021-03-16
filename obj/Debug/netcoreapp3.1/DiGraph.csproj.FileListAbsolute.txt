@@ -1,0 +1,13 @@
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.exe
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.deps.json
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.runtimeconfig.json
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.runtimeconfig.dev.json
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.dll
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\bin\Debug\netcoreapp3.1\DiGraph.pdb
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.csprojAssemblyReference.cache
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.AssemblyInfoInputs.cache
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.AssemblyInfo.cs
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.csproj.CoreCompileInputs.cache
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.dll
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.pdb
+C:\Users\subai\bootcampFiles\DOTNET\DiGraph\obj\Debug\netcoreapp3.1\DiGraph.genruntimeconfig.cache
