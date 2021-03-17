@@ -2,33 +2,33 @@ using System.Collections.Generic;
 
 namespace DiGraph
 {
-    public interface IGraph <TV, TK>
+    public interface IGraph <Vertex, Edge>
     {
         /// <summary>
         /// Adds a new vertex to the graph, if it is not already existing.
         /// </summary>
         /// <param name="vertex">The vertex to be added</param>
         /// <returns>True if and only if the vertex is successfully added.</returns>
-        bool AddVertex(TV vertex);
+        bool AddNode(Vertex node);
 
         /// <summary>
         /// Adds a collection of vertices to the graph.
         /// </summary>
         /// <param name="set">The set of vertices to be added</param>
-        void AddVertex(IEnumerable<TV> set);
+        void AddNode(IEnumerable<Vertex> nodes);
 
         /// <summary>
         /// Removes the specified vertex, if existing.
         /// </summary>
         /// <param name="vertex">The vertex to be removed from the graph</param>
         /// <returns>True if and only if the vertex is successfully removed.</returns>
-        bool DeleteVertex(TV vertex);
+        bool DeleteNode(Vertex node);
 
         /// <summary>
         /// Removes from the graph each vertex contained in the specified set.
         /// </summary>
         /// <param name="set">The set containing vertices to be removed</param>
-        void DeleteVertex(IEnumerable<TV> set);
+        void DeleteNode(IEnumerable<Vertex> nodes);
 
         /// <summary>
         /// Creates an edge, having a given weigth, between two vertices in the graph.
@@ -37,7 +37,7 @@ namespace DiGraph
         /// <param name="v2">The destination vertex</param>
         /// <param name="weigth">The weigth of the edge to be created</param>
         /// <returns>True if and only if the edge is created successfully.</returns>
-        bool AddEdge(TV v1, TV v2, TK weigth);
+        bool AddEdge(Vertex v1, Vertex v2, int weigth);
 
         /// <summary>
         /// Returns the weigth of the edge departuring from v1 and arriving to v2, if existing.
@@ -45,7 +45,7 @@ namespace DiGraph
         /// <param name="v1">The departuring vertex</param>
         /// <param name="v2">The destination vertex</param>
         /// <returns>The weigth of the edge</returns>
-        TK GetWeight(TV v1, TV v2);
+        int GetWeight(Vertex v1, Vertex v2);
 
         /// <summary>
         /// Deletes the edge departuring from vertex v1 and arriving to vertex v2.
@@ -53,7 +53,7 @@ namespace DiGraph
         /// <param name="v1">The departuring vertex</param>
         /// <param name="v2">The destination vertex</param>
         /// <returns>True if and only if the edge is successfully removed from the graph</returns>
-        bool DeleteEdge(TV v1, TV v2);
+        bool DeleteEdge(Vertex v1, Vertex v2);
 
         /// <summary>
         /// Tells whether vertex v1 is adjacent to vertex v2.
@@ -61,28 +61,28 @@ namespace DiGraph
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns>True if and only if v1 is adjacent to v2</returns>
-        bool AreAdjacent(TV v1, TV v2);
+        bool AreAdjacent(Vertex v1, Vertex v2);
 
         /// <summary>
         /// Gets the degree of the specified vertex.
         /// </summary>
         /// <param name="vertex">The target vertex</param>
         /// <returns>An integer specifying the degree of the specified vertex</returns>
-        int Degree(TV vertex);
+        int Degree(Vertex vertex);
 
         /// <summary>
         /// Gets the outgoing degree of the specified vertex.
         /// </summary>
         /// <param name="vertex">The target vertex</param>
         /// <returns>An integer specifying the outgoing degree of the specified vertex</returns>
-        int OutDegree(TV vertex);
+        int OutDegree(Vertex vertex);
 
         /// <summary>
         /// Gets the ingoing degree of the specified vertex.
         /// </summary>
         /// <param name="vertex">The target vertex</param>
         /// <returns>An integer specifying the ingoing degree of the specified vertex</returns>
-        int InDegree(TV vertex);
+        int InDegree(Vertex vertex);
 
         /// <summary>
         /// Gets the number of vertices in the graph
@@ -101,18 +101,18 @@ namespace DiGraph
         /// </summary>
         /// <param name="vertex">The target vertex</param>
         /// <returns>A set of adjacent vertices</returns>
-        IEnumerable<TV> AdjacentVertex(TV vertex);
+        IEnumerable<Vertex> AdjacentVertex(Vertex node);
 
         /// <summary>
         /// Retrives the vertex set of the graph.
         /// </summary>
         /// <returns>The vertex set of the graph</returns>
-        IEnumerable<TV> GetVertexSet();
+        IEnumerable<Vertex> GetVertexSet();
 
         /// <summary>
         /// Retrives the edge set of the graph.
         /// </summary>
         /// <returns>The edge set of the graph</returns>
-        IEnumerable<IPairValue<TV>> GetEdgeSet();
+        IEnumerable<Edge<Vertex>> GetEdgeSet();
     }
 }

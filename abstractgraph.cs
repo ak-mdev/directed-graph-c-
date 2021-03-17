@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace DiGraph
 {
-    public abstract class AbstractGraph <TV,TK> : IGraph<TV,TK>
+    public abstract class AbstractGraph <Vertex,Edge> : IGraph<Vertex,Edge>
     {
-        protected readonly List<TV> VertexSet = new List<TV>();
-        protected readonly List<IPairValue<TV>> EdgeSet = new List<IPairValue<TV>>();
-        protected readonly Dictionary<IPairValue<TV>, TK> Weights = new Dictionary<IPairValue<TV>, TK>();
-        public bool AddVertex(TV vertex)
+        protected readonly List<Vertex> VertexSet = new List<Vertex>();
+        protected readonly List<Edge<Vertex>> EdgeSet = new List<Edge<Vertex>>();
+        protected readonly Dictionary<Edge<Vertex>, Edge> Edges = new Dictionary<Edge<Vertex>, Edge>();
+        public bool AddVertex(Vertex vertex)
         {
             if (vertex == null)
                 throw new ArgumentNullException();
@@ -17,7 +17,7 @@ namespace DiGraph
             VertexSet.Add(vertex);
             return true;
         }
-        public void AddVertex(IEnumerable<TV> set)
+        public void AddVertex(IEnumerable<Vertex> set)
         {
             if (set == null)
                 throw new ArgumentNullException();
@@ -26,7 +26,7 @@ namespace DiGraph
                     if (it.Current != null && !VertexSet.Contains(it.Current))
                         VertexSet.Add(it.Current);
         }
-        public void DeleteVertex(IEnumerable<TV> set)
+        public void DeleteVertex(IEnumerable<Vertex> set)
         {
             if (set == null)
                 throw new ArgumentNullException();
@@ -35,7 +35,7 @@ namespace DiGraph
                     if (it.Current != null)
                         VertexSet.Remove(it.Current);
         }
-        public bool DeleteVertex(TV vertex)
+        public bool DeleteVertex(Vertex vertex)
         {
             if (vertex == null)
                 throw new ArgumentNullException();
@@ -44,15 +44,15 @@ namespace DiGraph
             VertexSet.Remove(vertex);
             return true;
         }
-        public IEnumerable<TV> GetVertexSet()
+        public IEnumerable<Vertex> GeVertexertexSet()
         {
-            foreach (TV vertex in VertexSet)
+            foreach (Vertex vertex in VertexSet)
                 yield return vertex;
         }
 
-        public IEnumerable<IPairValue<TV>> GetEdgeSet()
+        public IEnumerable<Edge<Vertex>> GetEdgeSet()
         {
-            foreach (IPairValue<TV> edge in EdgeSet)
+            foreach (Edge<Vertex> edge in EdgeSet)
                 yield return edge;
         }
 
@@ -64,14 +64,59 @@ namespace DiGraph
         {
             return EdgeSet.Count;
         }
-        public abstract bool AddEdge(TV v1, TV v2, TK weigth);
-        public abstract TK GetWeight(TV v1, TV v2);
+        public abstract bool AddEdge(Vertex v1, Vertex v2, Edge weigth);
+        public abstract Edge GetEdge(Vertex v1, Vertex v2);
 
-        public abstract bool DeleteEdge(TV v1, TV v2);
-        public abstract bool AreAdjacent(TV v1, TV v2);
-        public abstract int Degree(TV vertex);
-        public abstract int OutDegree(TV vertex);
-        public abstract int InDegree(TV vertex);
-        public abstract IEnumerable<TV> AdjacentVertex(TV vertex);
+        public abstract bool DeleteEdge(Vertex v1, Vertex v2);
+        public abstract bool AreAdjacent(Vertex v1, Vertex v2);
+        public abstract int Degree(Vertex vertex);
+        public abstract int OutDegree(Vertex vertex);
+        public abstract int InDegree(Vertex vertex);
+        public abstract IEnumerable<Vertex> AdjacenVertexertex(Vertex vertex);
+
+        public bool AddNode(Vertex node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNode(IEnumerable<Vertex> nodes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteNode(Vertex node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteNode(IEnumerable<Vertex> nodes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddEdge(Vertex v1, Vertex v2, int weigth)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Edge<Vertex>> IGraph<Vertex, Edge>.GetEdgeSet()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetWeight(Vertex v1, Vertex v2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Vertex> AdjacentVertex(Vertex node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Vertex> GetVertexSet()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
