@@ -21,17 +21,15 @@ namespace DiGraph
             }
 
             public bool NotEmpty(){
-                if(queue.Count>0){
-                    return true;
-                }else{
-                    return true;
-                }
+                return queue.Count>0;
             }
 
         }
 
         class VertexMarkSet{
-            List<int> markSet= new List<int>();
+            // HashSet can only contain unique values 
+            // this is good for checking if a node has been visited or not
+            HashSet<int> markSet= new HashSet<int>();
             public void Add (int vertex){
                 markSet.Add(vertex);
             }
@@ -42,31 +40,63 @@ namespace DiGraph
 
         }
 
-        private void DepthFirstTraversal(){
+        private void DepthFirstTraversal(int start, VertexMarkSet visited, int destination, int hops, int max_hops){
+            // displaying current node
+            var node_name = _graph.GetNodeName(start);
+            Console.Write(node_name);
 
+            // Fetching next stops
+            var stops = _graph.ListNeighbours(start);
+            foreach(int stop in stops){ 
+                var stop_name= _graph.GetNodeName(stop);
+                Console.Write(" --> ");
+                // Console.Write(destination_name); 
+                if (hops == max_hops  || visited.Contains(stop) && destination==stop_name) {
+                    Console.Write(_graph.GetNodeName(stop));
+                    Console.Write($" Reached destination in {hops} stops");
+                    Console.WriteLine();
+                    return;
+                }
+
+                // cycle detection initiated
+                if (destination==stop_name){
+                    visited.Add(start);
+                }
+
+                DepthFirstTraversal(stop,visited,destination,hops+1, max_hops);
+            }
         }
 
-        private void BreathFirstTraversal(int start){
+        public void BreathFirstTraversal(int start){
             /* make a queue of vertices */
             var queue = new VertexQue();
             /* make a mark set of vertices */
-            var markSet = new VertexMarkSet();
+            var visited = new VertexMarkSet();
             /* enqueue and mark start */
             queue.Enqueue(start);
-            markSet.Add(start);
+            visited.Add(start);
             /* while the queue is not empty */
             while(queue.NotEmpty())
             {
                 /* dequeue a vertext */
-                var vertex = queue.Dequeue();
-                foreach(int neighbour in _graph.ListNeighbours(vertex))
+                var departure = queue.Dequeue();
+                var destinations = _graph.ListNeighbours(departure);
+                Console.WriteLine(_graph.GetNodeName(departure));
+                foreach(int destination in destinations)
                 {
-                    /* enqueue and mark all the unmarked neighbours of the vertex */
-                    if (!markSet.Contains(neighbour))
-                    {
-                        markSet.Add(neighbour);
-                        queue.Enqueue(neighbour);
+                    // Console.WriteLine(" v ");
+                    Console.WriteLine(_graph.GetNodeName(destination));
+                    if (destination == 2) {
+                        Console.WriteLine(" Reached destination ");
                     }
+                    /* enqueue and mark all the unmarked neighbours of the vertex */
+                    if (!visited.Contains(destination))
+                    {
+                        // Console.Write(_graph.GetNodeName(destination));
+                        visited.Add(destination);
+                        queue.Enqueue(destination);
+                    }
+                    Console.WriteLine();
                 }
             }
         }
@@ -90,16 +120,17 @@ namespace DiGraph
             return distance;
         }
 
-    //     public void pathsWithMaxStops(char start , char end, int max_hops){
-    //         int root = nodes.Find(node => node.data == start).index;
-    //         int destination = nodes.Find(node => node.data == end).index;
+        public void pathsWithMaxStops(char start , char end, int max_hops){
+            int root = _graph.GetNodeIndex(start);
+            int destination = _graph.GetNodeIndex(end);
 
-    //         int trips =0;
-    //         int current=root;
-    //         int next;
-    //         int paths;
+            List<int[]> paths = new List<int[]>();
+            var visited = new VertexMarkSet();
+            int hops =1;
 
-    //     }
+            DepthFirstTraversal(root,visited,destination,hops, max_hops);
+
+        }
 
     //     public void pathsWithExactStops(char start, char end, int stops){
 

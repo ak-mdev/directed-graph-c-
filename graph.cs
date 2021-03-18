@@ -100,6 +100,10 @@ namespace DiGraph
             return index;
         }
 
+        public char GetNodeName(int index){
+            return nodes.Find(node => node.index == index).data;
+        }
+
         public int GetEdgeWeight(int start, int end){
             return adjMatrix[start,end];
         }
@@ -107,14 +111,14 @@ namespace DiGraph
         {
             /* create a new list */
             List<int> neighbours= new List<int>();
-            
             for(int j=0; j<graphSize; j++){
             /* if j is a neighbour of i then add it to the list */
                 if(adjMatrix[vertex,j]>0){
-                    neighbours.Add(adjMatrix[vertex,j]);
+                    neighbours.Add(j);
                 }
             }
             /* return the list */
+            
             return neighbours;
         }
         

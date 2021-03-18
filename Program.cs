@@ -74,7 +74,16 @@ namespace DiGraph
             Console.WriteLine();
 
             // // Case 6
-            // // Console.Write("The number of trips starting at C and ending at C with max 3 stops");
+
+            Console.WriteLine("The number of trips starting at C and ending at C with max 3 stops");
+            traverse.pathsWithMaxStops('C','C',3);
+            Console.WriteLine();
+            
+            // // Case 7
+
+            Console.WriteLine("The number of trips starting at A and ending at C with max 4 stops");
+            traverse.pathsWithMaxStops('A','C',4);
+            Console.WriteLine();
             
 
 
