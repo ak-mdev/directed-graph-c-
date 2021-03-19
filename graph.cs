@@ -149,6 +149,75 @@ namespace DiGraph
         {
             Console.WriteLine(nodes[v].data);
         }
-    }
 
+        // public void RunDijkstra()//runs dijkstras algorithm on the adjacency matrix
+        // {
+        //     Console.WriteLine("***********Dijkstra's Shortest Path***********");
+        //     int[] distance = new int[graphSize];
+        //     int[] previous = new int[graphSize];
+        //     for (int i = 1; i < graphSize; i++)
+        //     {
+        //         distance[i] = 1000000000;
+        //         previous[i] = 0;
+        //     }
+        //     int source = 1;
+        //     int current_distance = 0;
+        //     PriorityQueue<int> pq = new PriorityQueue<int>();
+        //     //enqueue the source
+        //     pq.Enqueue(source, adjMatrix);
+        //     //insert all remaining nodes into the pq
+        //     for (int i = 1; i < graphSize; i++)
+        //     {
+        //         for (int j = 1; j < graphSize; j++)
+        //         {
+        //             if (adjMatrix[i, j] > 0)
+        //             {
+        //                 pq.Enqueue(i, adjMatrix[i, j]);
+        //             }
+        //         }
+        //     }
+        //     while (!pq.empty())
+        //     {
+        //         int u = pq.dequeue_min();
+        //         for (int v = 1; v < graphSize; v++)//scan each row fully
+        //         {
+        //             if (adjMatrix[u,v] > 0)//if there is an adjacent node
+        //             {
+        //                 int alt = distance[u] + adjMatrix[u, v];
+        //                 if (alt < distance[v])
+        //                 {
+        //                     distance[v] = alt;
+        //                     previous[v] = u;
+        //                     pq.Enqueue(u, distance[v]);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     //distance to 1..2..3..4..5..6 etc lie inside each index
+
+        //     for (int i = 1; i < graphSize; i++)
+        //     {
+        //         Console.WriteLine("Distance from {0} to {1}: {2}", source, i, distance[i]);
+        //     }
+        //     printPath(previous, source, graphSize - 1);
+        // }
+        // private void printPath(int[] path, int start, int end)
+        // {
+        //     //prints a path, given a start and end, and an array that holds previous 
+        //     //nodes visited
+        //     Console.WriteLine("Shortest path from source to destination:");
+        //     int temp = end;
+        //     Stack<int> s = new Stack<int>();
+        //     while (temp != start)
+        //     {
+        //         s.Push(temp);
+        //         temp = path[temp];
+        //     }
+        //     Console.Write("{0} ", temp);//print source
+        //     while (s.Count != 0)
+        //     {
+        //         Console.Write("{0} ", s.Pop());//print successive nodes to destination
+        //     }
+        // }
+    }
 }

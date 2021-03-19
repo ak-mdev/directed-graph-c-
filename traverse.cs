@@ -14,6 +14,7 @@ namespace DiGraph
 
             public void Enqueue(int vertex){
                 queue.Enqueue(vertex);
+            
             }
 
             public int Dequeue(){
@@ -21,9 +22,17 @@ namespace DiGraph
             }
 
             public bool NotEmpty(){
+                queue.ToArray();
                 return queue.Count>0;
             }
 
+            public int[] ToArray(){
+                return queue.ToArray();
+            }
+
+            public int Count(){
+                return queue.Count;
+            }
         }
 
         class VertexMarkSet{
@@ -38,67 +47,6 @@ namespace DiGraph
                 return markSet.Contains(vertex);
             }
 
-        }
-
-        private void DepthFirstTraversal(int start, VertexMarkSet visited, int destination, int hops, int max_hops){
-            // displaying current node
-            var node_name = _graph.GetNodeName(start);
-            Console.Write(node_name);
-
-            // Fetching next stops
-            var stops = _graph.ListNeighbours(start);
-            foreach(int stop in stops){ 
-                var stop_name= _graph.GetNodeName(stop);
-                Console.Write(" --> ");
-                // Console.Write(destination_name); 
-                if (hops == max_hops  || visited.Contains(stop) && destination==stop_name) {
-                    Console.Write(_graph.GetNodeName(stop));
-                    Console.Write($" Reached destination in {hops} stops");
-                    Console.WriteLine();
-                    return;
-                }
-
-                // cycle detection initiated
-                if (destination==stop_name){
-                    visited.Add(start);
-                }
-
-                DepthFirstTraversal(stop,visited,destination,hops+1, max_hops);
-            }
-        }
-
-        public void BreathFirstTraversal(int start){
-            /* make a queue of vertices */
-            var queue = new VertexQue();
-            /* make a mark set of vertices */
-            var visited = new VertexMarkSet();
-            /* enqueue and mark start */
-            queue.Enqueue(start);
-            visited.Add(start);
-            /* while the queue is not empty */
-            while(queue.NotEmpty())
-            {
-                /* dequeue a vertext */
-                var departure = queue.Dequeue();
-                var destinations = _graph.ListNeighbours(departure);
-                Console.WriteLine(_graph.GetNodeName(departure));
-                foreach(int destination in destinations)
-                {
-                    // Console.WriteLine(" v ");
-                    Console.WriteLine(_graph.GetNodeName(destination));
-                    if (destination == 2) {
-                        Console.WriteLine(" Reached destination ");
-                    }
-                    /* enqueue and mark all the unmarked neighbours of the vertex */
-                    if (!visited.Contains(destination))
-                    {
-                        // Console.Write(_graph.GetNodeName(destination));
-                        visited.Add(destination);
-                        queue.Enqueue(destination);
-                    }
-                    Console.WriteLine();
-                }
-            }
         }
 
         public int distance(char [] route)//returns a distance for a route that consists of multiple nodes
@@ -121,90 +69,81 @@ namespace DiGraph
         }
 
         public void pathsWithMaxStops(char start , char end, int max_hops){
+            // graph index of start and end nodes
             int root = _graph.GetNodeIndex(start);
             int destination = _graph.GetNodeIndex(end);
 
-            List<int[]> paths = new List<int[]>();
-            var visited = new VertexMarkSet();
-            int hops =1;
+            VertexQue trips = new VertexQue();
+            
+            DFSMax(root, trips ,destination);
 
-            DepthFirstTraversal(root,visited,destination,hops, max_hops);
+            Console.WriteLine($"There are {trips.Count()} trips from {start} to {end}. ");
 
         }
 
-    //     public void pathsWithExactStops(char start, char end, int stops){
+        private void DFSMax(int start, VertexQue trips, int destination){
+            // displaying current node
+            var current_node = _graph.GetNodeName(start);
+            
+            // Fetching next stops
+            var stops = _graph.ListNeighbours(start);
+            foreach(int stop in stops){ 
 
-    //     }
+                if (stop==destination ) {
+                    trips.Enqueue(stop);    
+                    return;
+                }
 
-    // }
-    // public void RunDijkstra()//runs dijkstras algorithm on the adjacency matrix
-        // {
-        //     Console.WriteLine("***********Dijkstra's Shortest Path***********");
-        //     int[] distance = new int[graphSize];
-        //     int[] previous = new int[graphSize];
-        //     for (int i = 1; i < graphSize; i++)
-        //     {
-        //         distance[i] = infinity;
-        //         previous[i] = 0;
-        //     }
-        //     int source = 1;
-        //     distance = 0;
-        //     PriorityQueue<int> pq = new PriorityQueue<int>();
-        //     //enqueue the source
-        //     pq.Enqueue(source, adjMatrix);
-        //     //insert all remaining nodes into the pq
-        //     for (int i = 1; i < graphSize; i++)
-        //     {
-        //         for (int j = 1; j < graphSize; j++)
-        //         {
-        //             if (adjMatrix[i, j] > 0)
-        //             {
-        //                 pq.Enqueue(i, adjMatrix[i, j]);
-        //             }
-        //         }
-        //     }
-        //     while (!pq.Empty())
-        //     {
-        //         int u = pq.dequeue_min();
-        //         for (int v = 1; v < graphSize; v++)//scan each row fully
-        //         {
-        //             if (adjMatrix[u,v] > 0)//if there is an adjacent node
-        //             {
-        //                 int alt = distance[u] + adjMatrix[u, v];
-        //                 if (alt < distance[v])
-        //                 {
-        //                     distance[v] = alt;
-        //                     previous[v] = u;
-        //                     pq.Enqueue(u, distance[v]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     //distance to 1..2..3..4..5..6 etc lie inside each index
+                DFSMax(stop,trips,destination);
+            }
+        }
+        
 
-        //     for (int i = 1; i < graphSize; i++)
-        //     {
-        //         Console.WriteLine("Distance from {0} to {1}: {2}", source, i, distance[i]);
-        //     }
-        //     printPath(previous, source, graphSize - 1);
-        // }
-        // private void printPath(int[] path, int start, int end)
-        // {
-        //     //prints a path, given a start and end, and an array that holds previous 
-        //     //nodes visited
-        //     Console.WriteLine("Shortest path from source to destination:");
-        //     int temp = end;
-        //     Stack<int> s = new Stack<int>();
-        //     while (temp != start)
-        //     {
-        //         s.Push(temp);
-        //         temp = path[temp];
-        //     }
-        //     Console.Write("{0} ", temp);//print source
-        //     while (s.Count != 0)
-        //     {
-        //         Console.Write("{0} ", s.Pop());//print successive nodes to destination
-        //     }
-        // }
+        public void pathsFrom(char start, char end){
+            int root = _graph.GetNodeIndex(start);
+            int destination = _graph.GetNodeIndex(end);
+            VertexQue route = new VertexQue();
+
+            BFSTraversal(root, route, destination);
+
+            Console.Write($" There are {route.Count()} trips from {start} to {end}");
+                
+        }
+
+        private void BFSTraversal(int start, VertexQue route, int destination){
+            
+            /* make a queue of vertices */
+            var queue = new VertexQue();
+            /* make a mark set of vertices */
+            var visited = new VertexMarkSet();
+        
+            /* enqueue and mark start */
+            queue.Enqueue(start);
+            visited.Add(start);
+            /* while the queue is not empty */
+            while(queue.NotEmpty())
+            {
+                /* dequeue a vertext */
+                var departure = queue.Dequeue();
+                var stops = _graph.ListNeighbours(departure);
+                
+                foreach(int stop in stops)
+                {
+                
+                    /* enqueue and mark all the unmarked neighbours of the vertex */
+                    if (!visited.Contains(stop))
+                    {
+                        visited.Add(stop);
+                        queue.Enqueue(stop);
+                    }
+
+                    if(stop==destination){
+                        route.Enqueue(stop);
+                    }
+                }
+            }
+        }
+
+        
     }
 }
