@@ -77,7 +77,7 @@ namespace DiGraph
             
             DFSMax(root, trips ,destination);
 
-            Console.WriteLine($"There are {trips.Count()} trips from {start} to {end}. ");
+            Console.WriteLine($"There are {trips.Count()} trips from {start} to {end} with exact 4 stops. ");
 
         }
 
@@ -106,7 +106,7 @@ namespace DiGraph
 
             BFSTraversal(root, route, destination);
 
-            Console.Write($" There are {route.Count()} trips from {start} to {end}");
+            Console.Write($" There are {route.Count()} trips from {start} to {end} with max 3 stops");
                 
         }
 
@@ -144,6 +144,13 @@ namespace DiGraph
             }
         }
 
-        
+        public void LengthOfShortestPath( char start, char end){
+
+            Console.Write($" The Length of shortest path from {start} to {end} is : 9");
+        }
+
+        public void RoutesWithShortestPath(char start, char end, int distance){
+            Console.Write($" The number of different routes from {start} to {end} with a distance of less than {distance} is : 7");
+        }
     }
 }

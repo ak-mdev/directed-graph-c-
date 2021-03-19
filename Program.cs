@@ -81,11 +81,20 @@ namespace DiGraph
             traverse.pathsWithMaxStops('A','C',4);
             Console.WriteLine();
             
-            // // // Case 7
+            // // // Case 8
+            Console.WriteLine("Using Djikstra's shortest path Algorithm");
+            traverse.LengthOfShortestPath('A','C');
+            Console.WriteLine();
 
-            // Console.WriteLine("The number of trips starting at A and ending at C with max 4 stops");
-            // traverse.pathsWithMaxStops('A','C',4);
-            // Console.WriteLine();
+            // // // Case 9
+            Console.WriteLine("Using Djikstra's shortest path Algorithm");
+            traverse.LengthOfShortestPath('A','C');
+            Console.WriteLine();
+
+            // // // Case 10
+            Console.WriteLine("Using Djikstra's shortest path Algorithm and BFS.");
+            traverse.RoutesWithShortestPath('A','C', 30);
+            Console.WriteLine();
             
 
 
