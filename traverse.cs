@@ -144,9 +144,25 @@ namespace DiGraph
             }
         }
 
-        public void LengthOfShortestPath( char start, char end){
+        public void LengthOfShortestPath(char start, char end){
+            if(start==end){
+                PriorityQueue<int> neighbours = new PriorityQueue<int>();
+                foreach(int neighbour in _graph.ListNeighbours(_graph.GetNodeIndex(start))){
+                    neighbours.Enqueue(
+                        neighbour, 
+                        _graph.GetEdgeWeight(_graph.GetNodeIndex(start), _graph.GetNodeIndex(end))
+                    );
+                }
+                int root = neighbours.dequeue_min();
+                int distance = _graph.RunDijkstra(root, _graph.GetNodeIndex(end)) + _graph.GetEdgeWeight(_graph.GetNodeIndex(start), root);
+            
+                Console.WriteLine($"The shortest distance from {start} to {end}: {distance}");
+            }else{
+                int distance = _graph.RunDijkstra(_graph.GetNodeIndex(start), _graph.GetNodeIndex(end));
 
-            Console.Write($" The Length of shortest path from {start} to {end} is : 9");
+                Console.WriteLine($"The shortest distance from {start} to {end}: {distance}");
+            }
+
         }
 
         public void RoutesWithShortestPath(char start, char end, int distance){

@@ -82,19 +82,19 @@ namespace DiGraph
             Console.WriteLine();
             
             // // // Case 8
-            Console.WriteLine("Using Djikstra's shortest path Algorithm");
+            // Console.WriteLine("Using Djikstra's shortest path Algorithm");
             traverse.LengthOfShortestPath('A','C');
             Console.WriteLine();
 
             // // // Case 9
-            Console.WriteLine("Using Djikstra's shortest path Algorithm");
-            traverse.LengthOfShortestPath('A','C');
+            // Console.WriteLine("Using Djikstra's shortest path Algorithm");
+            traverse.LengthOfShortestPath('B','B');
             Console.WriteLine();
 
             // // // Case 10
-            Console.WriteLine("Using Djikstra's shortest path Algorithm and BFS.");
-            traverse.RoutesWithShortestPath('A','C', 30);
-            Console.WriteLine();
+            // Console.WriteLine("Using Djikstra's shortest path Algorithm and BFS.");
+            // traverse.RoutesWithShortestPath('A','C', 30);
+            // Console.WriteLine();
             
 
 
